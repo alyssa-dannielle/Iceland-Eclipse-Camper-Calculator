@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iceland Eclipse 2026: Lodging & Logistics Core</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+    </style>
+</head>
+<body class="gradient-bg text-slate-100 min-h-screen font-sans antialiased pb-12">
+
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto px-4 pt-12 pb-6 text-center md:text-left">
+        <div class="inline-block bg-indigo-500/10 text-indigo-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-3 border border-indigo-500/20">
+            Aug 10 - 16, 2026 // Hellissandur
+        </div>
+        <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
+            Iceland Eclipse Logistics Strategy
+        </h1>
+        <p class="mt-3 text-lg text-slate-400 max-w-2xl">
+            An interactive dashboard comparing van specs, human clearances, and dynamic total budget projections.
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 mt-6 space-y-12">
+
+        <!-- LIVE INTERACTIVE CALCULATOR -->
+        <section class="bg-slate-900/80 border-2 border-indigo-500/30 rounded-2xl p-6 shadow-2xl backdrop-blur-md">
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <span>🧮</span> Live Trip Cost Estimator
+            </h2>
+            <p class="text-xs text-slate-400 mb-6">Select your configuration options below to watch the live totals aggregate in real-time.</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Inputs Group 1 -->
+                <div class="space-y-4">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">1. Select Vehicle Base</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="vehicle" value="2772" checked onchange="calculateTotal()" class="accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-white">Go SMART Automatic</p>
+                                    <p class="text-[11px] text-slate-400">Snuggle Mode (4'3" Bed)</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-indigo-300">$2,772</span>
+                        </label>
+                        
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="vehicle" value="3365" onchange="calculateTotal()" class="accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-white">Go LITE Automatic</p>
+                                    <p class="text-[11px] text-slate-400">Queen Roomy Mode (5'3" Bed)</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-indigo-300">$3,365</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Inputs Group 2 -->
+                <div class="space-y-4">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">2. Add-On Logistics</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-emerald-500/20 bg-emerald-500/5">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="parkingPass" checked disabled class="accent-emerald-500">
+                                <div>
+                                    <p class="text-sm font-medium text-white">Festival Camper Pass</p>
+                                    <p class="text-[11px] text-slate-400">Mandatory for front-row parking</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-emerald-400">+$600</span>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="explorerBundle" checked onchange="calculateTotal()" class="accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-white">Explorer Bundle</p>
+                                    <p class="text-[11px] text-slate-400">Sleeping bags, coffee press, gas, towels</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-indigo-300">+$78</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Dynamic Output Screen -->
+                <div class="bg-indigo-950/40 border border-indigo-500/30 rounded-xl p-5 flex flex-col justify-between shadow-inner">
+                    <div>
+                        <span class="text-[10px] font-mono tracking-widest uppercase text-indigo-400 block mb-1">Live Statement Summary</span>
+                        <div class="text-4xl font-black text-white tracking-tight" id="displayTotal">$3,450</div>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Includes selected van model, required festival driveway pass, kitchen amenities, and bedding utilities.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-indigo-900/60 flex items-center justify-between text-[11px] font-mono text-indigo-300">
+                        <span>Currency Context: USD</span>
+                        <span>0% Foreign Trans Fees</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Granular Vehicle Comparison Matrix -->
+        <section class="space-y-6">
+            <h2 class="text-2xl font-bold tracking-tight text-white border-b border-slate-800 pb-3">
+                Granular Vehicle & Human Clearance Matrix
+            </h2>
+            
+            <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur-sm">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-900/80 text-xs uppercase tracking-wider text-slate-400">
+                            <th class="p-4 font-semibold">Model & Space Layout</th>
+                            <th class="p-4 font-semibold">Transmission</th>
+                            <th class="p-4 font-semibold">Bed Size & Reality Check</th>
+                            <th class="p-4 font-semibold">Ceiling Headroom Comfort</th>
+                            <th class="p-4 font-semibold text-right">Base Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                        <tr class="hover:bg-slate-800/30 transition-colors">
+                            <td class="p-4 font-medium text-white">Go ICELAND (Fiat Doblo)</td>
+                            <td class="p-4">Manual</td>
+                            <td class="p-4">
+                                <span class="text-amber-400 font-medium">190cm x 125cm (4'1" Width)</span>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Snuggle Pro Tier (Slightly narrower than standard full bed)</p>
+                            </td>
+                            <td class="p-4 text-rose-400 font-medium">
+                                2'7" Ceiling Clearance
+                                <p class="text-[11px] text-slate-500 mt-0.5">❌ No sitting straight up in bed</p>
+                            </td>
+                            <td class="p-4 text-right font-semibold text-white">$2,690</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30 transition-colors">
+                            <td class="p-4 font-medium text-white">Go SMART (Fiat Doblo)</td>
+                            <td class="p-4">Automatic</td>
+                            <td class="p-4">
+                                <span class="text-amber-400 font-medium">190cm x 130cm (4'3" Width)</span>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Standard compact comfort width for close sleepers</p>
+                            </td>
+                            <td class="p-4 text-rose-400 font-medium">
+                                2'7" Ceiling Clearance
+                                <p class="text-[11px] text-slate-500 mt-0.5">❌ No sitting straight up in bed</p>
+                            </td>
+                            <td class="p-4 text-right font-semibold text-white">$2,772</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30 text-indigo-200 bg-indigo-500/5 transition-colors">
+                            <td class="p-4 font-medium text-white">
+                                Go LITE (Renault Trafic)
+                                <span class="bg-indigo-500/20 text-indigo-300 text-[10px] px-1.5 py-0.5 rounded font-mono block w-max mt-1">Roomy Upgrade</span>
+                            </td>
+                            <td class="p-4">Automatic</td>
+                            <td class="p-4">
+                                <span class="text-emerald-400 font-semibold">190cm x 160cm (5'3" Width)</span>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Spacious luxury room width (True US Queen size space)</p>
+                            </td>
+                            <td class="p-4 text-emerald-400 font-medium">
+                                4'5" Ceiling Clearance
+                                <p class="text-[11px] text-indigo-300 mt-0.5">✅ Full height room to sit completely upright</p>
+                            </td>
+                            <td class="p-4 text-right font-semibold text-white">$3,365</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Static Context Strategy Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6">
+                <h3 class="text-lg font-bold text-white mb-4 border-b border-slate-800 pb-2">🎒 The On-Site Advantage</h3>
+                <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                    Choosing the van rental means avoiding the off-site <strong>Shuttle Trap</strong> completely. Off-site locations (Hostels/Hotels) require daily commutes with restrictive schedules.
+                </p>
+                <div class="bg-slate-950/60 border border-amber-500/20 rounded-xl p-3 text-xs text-amber-300/90 flex gap-2">
+                    <span>⚠️</span>
+                    <p><strong>Note on Schedule Blocks:</strong> On-site camper positions are completely locked down for driving safety rules once you are parked. It will remain your stationary base camp until checkout day on August 16th!</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4 border-b border-slate-800 pb-2">📋 Next Strategic Action Items</h3>
+                    <ul class="space-y-2 text-xs text-slate-400 list-disc pl-4">
+                        <li>Cross-check your specific bank/credit cards to verify absolute zero foreign conversion fees.</li>
+                        <li>Ping Go Campers support via email to sync precise airport landing times with early/late key pick-up protocols.</li>
+                    </ul>
+                </div>
+                <div class="text-xs font-mono text-indigo-400 bg-indigo-950/30 p-2.5 rounded-lg border border-indigo-900/40 mt-4 text-center">
+                    Deploy Status: Live Calculations Enabled
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function calculateTotal() {
+            // Get base vehicle cost from selected radio option
+            const vehicleCost = parseInt(document.querySelector('input[name="vehicle"]:checked').value);
+            
+            // Set required baseline variables
+            const fixedParkingPass = 600;
+            
+            // Check dynamic explorer bundle status
+            const hasExplorer = document.getElementById('explorerBundle').checked;
+            const bundleCost = hasExplorer ? 78 : 0;
+            
+            // Tally raw calculations
+            const ultimateTotal = vehicleCost + fixedParkingPass + bundleCost;
+            
+            // Render beautiful UI updates dynamically
+            document.getElementById('displayTotal').innerText = `$${ultimateTotal.toLocaleString()}`;
+        }
+        
+        // Run initial setup cycle on window load 
+        window.onload = calculateTotal;
+    </script>
+</body>
+</html>
